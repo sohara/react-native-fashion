@@ -7,9 +7,10 @@ import { LoadAssets, theme } from './src/components';
 import { Welcome } from './src/Authentication/Welcome';
 
 const fonts = {
-  'SFProText-Bold': require('./assets/fonts/SF-Pro-Text-Bold.otf'),
-  'SFProText-Semibold': require('./assets/fonts/SF-Pro-Text-Semibold.otf'),
-  'SFProText-Regular': require('./assets/fonts/SF-Pro-Text-Regular.otf'),
+  'SFProDisplay-Bold': require('./assets/fonts/SF-Pro-Display-Bold.otf'),
+  'SFProDisplay-Semibold': require('./assets/fonts/SF-Pro-Display-Semibold.otf'),
+  'SFProDisplay-Regular': require('./assets/fonts/SF-Pro-Display-Regular.otf'),
+  'SFProDisplay-Medium': require('./assets/fonts/SF-Pro-Display-Medium.otf'),
 };
 
 const AuthenticationStack = createNativeStackNavigator();
