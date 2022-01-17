@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { ThemeProvider } from '@shopify/restyle';
 
 import { Onboarding } from './src/Authentication/Onboarding';
-import { LoadAssets } from './src/components';
+import { LoadAssets, theme } from './src/components';
 import { Welcome } from './src/Authentication/Welcome';
 
 const fonts = {
@@ -24,8 +25,10 @@ const AuthenticationNavigator = () => {
 // eslint-disable-next-line import/no-default-export
 export default function App() {
   return (
-    <LoadAssets fonts={fonts}>
-      <AuthenticationNavigator />
-    </LoadAssets>
+    <ThemeProvider theme={theme}>
+      <LoadAssets fonts={fonts}>
+        <AuthenticationNavigator />
+      </LoadAssets>
+    </ThemeProvider>
   );
 }
