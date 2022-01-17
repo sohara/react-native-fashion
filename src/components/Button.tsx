@@ -2,7 +2,8 @@ import { useTheme } from '@shopify/restyle';
 import { StyleSheet } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 
-import { Theme, Text } from './Theme';
+import type { Theme } from './Theme';
+import { Text } from './Theme';
 
 interface ButtonProps {
   variant?: 'primary' | 'default';
