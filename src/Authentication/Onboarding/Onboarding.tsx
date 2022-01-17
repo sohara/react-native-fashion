@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
+import { Dimensions, Image, StyleSheet, View } from 'react-native';
 import Animated, {
+  Extrapolate,
+  interpolate,
   interpolateColor,
   useAnimatedScrollHandler,
   useAnimatedStyle,
@@ -8,7 +10,9 @@ import Animated, {
   useSharedValue,
 } from 'react-native-reanimated';
 
-import { BORDER_RADIUS, Slide, SLIDE_HEIGHT } from './Slide';
+import { theme } from '../../components';
+
+import { Slide, SLIDE_HEIGHT } from './Slide';
 import { Subslide } from './Subslide';
 import { Dot } from './Dot';
 
@@ -20,7 +24,7 @@ const styles = StyleSheet.create({
   },
   slider: {
     height: SLIDE_HEIGHT,
-    borderBottomRightRadius: BORDER_RADIUS,
+    borderBottomRightRadius: theme.borderRadii.xl,
   },
   footer: {
     flex: 1,
@@ -28,15 +32,22 @@ const styles = StyleSheet.create({
   footerContent: {
     flex: 1,
     backgroundColor: 'white',
-    borderTopLeftRadius: BORDER_RADIUS,
+    borderTopLeftRadius: theme.borderRadii.xl,
   },
   pagination: {
     ...StyleSheet.absoluteFillObject,
-    height: BORDER_RADIUS,
+    height: theme.borderRadii.xl,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     width,
+  },
+  underlay: {
+    ...StyleSheet.absoluteFillObject,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    borderBottomRightRadius: theme.borderRadii.xl,
+    overflow: 'hidden',
   },
 });
 
@@ -113,6 +124,29 @@ export const Onboarding = () => {
   return (
     <View style={styles.container}>
       <Animated.View style={[styles.slider, sliderStyle]}>
+        {slides.map(({ picture }, index) => {
+          const style = useAnimatedStyle(() => ({
+            opacity: interpolate(
+              x.value,
+              [(index - 0.5) * width, index * width, (index + 0.5) * width],
+              [0, 1, 0],
+              Extrapolate.CLAMP
+            ),
+          }));
+          return (
+            <Animated.View style={[styles.underlay, style]} key={index}>
+              <Image
+                source={picture.src}
+                style={{
+                  width: width - theme.borderRadii.xl,
+                  height:
+                    ((width - theme.borderRadii.xl) * picture.height) /
+                    picture.width,
+                }}
+              />
+            </Animated.View>
+          );
+        })}
         <Animated.ScrollView
           ref={scrollRef}
           horizontal

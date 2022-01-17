@@ -16,7 +16,6 @@ interface SlideProps {
 
 const { width, height } = Dimensions.get('window');
 export const SLIDE_HEIGHT = 0.61 * height;
-export const BORDER_RADIUS = 75;
 
 const styles = StyleSheet.create({
   container: {
@@ -25,14 +24,6 @@ const styles = StyleSheet.create({
   titleContainer: {
     height: 100,
     justifyContent: 'center',
-  },
-  underlay: {
-    ...StyleSheet.absoluteFillObject,
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-  },
-  picture: {
-    ...StyleSheet.absoluteFillObject,
   },
 });
 
@@ -44,16 +35,6 @@ export const Slide = ({ label, right, picture }: SlideProps) => {
   ];
   return (
     <View style={styles.container}>
-      <View style={styles.underlay}>
-        <Image
-          source={picture.src}
-          style={{
-            // ...StyleSheet.absoluteFillObject,
-            width: width - BORDER_RADIUS,
-            height: ((width - BORDER_RADIUS) * picture.height) / picture.width,
-          }}
-        />
-      </View>
       <View style={[styles.titleContainer, { transform }]}>
         <Text variant="hero">{label}</Text>
       </View>
