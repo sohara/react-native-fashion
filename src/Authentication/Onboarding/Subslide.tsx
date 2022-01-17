@@ -65,7 +65,7 @@ export const Subslide = ({
       <Text style={styles.description}>{description}</Text>
       <Button
         onPress={onPress}
-        label={last ? "Let's get started" : 'Next'}
+        label={last ? `Let's get started` : 'Next'}
         variant={last ? 'primary' : 'default'}
       />
     </View>
