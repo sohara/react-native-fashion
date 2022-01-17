@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { Onboarding } from './src/Authentication/Onboarding';
 import { LoadAssets } from './src/components';
+import { Welcome } from './src/Authentication/Welcome';
 
 const fonts = {
   'SFProText-Bold': require('./assets/fonts/SF-Pro-Text-Bold.otf'),
@@ -16,6 +17,7 @@ const AuthenticationNavigator = () => {
   return (
     <AuthenticationStack.Navigator screenOptions={{ headerShown: false }}>
       <AuthenticationStack.Screen name="Onboarding" component={Onboarding} />
+      <AuthenticationStack.Screen name="Welcome" component={Welcome} />
     </AuthenticationStack.Navigator>
   );
 };

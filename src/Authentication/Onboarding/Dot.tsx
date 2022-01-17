@@ -1,8 +1,6 @@
-import { View } from 'react-native';
 import Animated, {
   Extrapolate,
   interpolate,
-  interpolateColor,
   useAnimatedStyle,
 } from 'react-native-reanimated';
 
@@ -11,7 +9,6 @@ interface DotProps {
   currentIndex: Animated.SharedValue<number>;
 }
 export const Dot = ({ currentIndex, index }: DotProps) => {
-  console.log({ currentIndex });
   const style = useAnimatedStyle(() => {
     const opacity = interpolate(
       currentIndex.value,
