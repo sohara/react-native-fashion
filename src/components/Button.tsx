@@ -6,7 +6,7 @@ import type { Theme } from './Theme';
 import { Text } from './Theme';
 
 interface ButtonProps {
-  variant?: 'primary' | 'default';
+  variant?: 'primary' | 'default' | 'transparent';
   label: string;
   onPress: () => void;
 }
@@ -27,8 +27,13 @@ export const Button = ({
 }: ButtonProps) => {
   const theme = useTheme<Theme>();
   const backgroundColor =
-    variant === 'primary' ? theme.colors.primary : theme.colors.grey;
-  const color = variant === 'primary' ? theme.colors.white : theme.colors.text;
+    variant === 'primary'
+      ? theme.colors.primary
+      : variant === 'transparent'
+      ? 'transparent'
+      : theme.colors.grey;
+  const color =
+    variant === 'primary' ? theme.colors.white : theme.colors.button;
   return (
     <RectButton style={[styles.button, { backgroundColor }]} onPress={onPress}>
       <Text variant="button" style={[{ color }]}>

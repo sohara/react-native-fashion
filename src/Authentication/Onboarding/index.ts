@@ -1,1 +1,1 @@
-export { Onboarding } from './Onboarding';
+export { Onboarding, assets } from './Onboarding';

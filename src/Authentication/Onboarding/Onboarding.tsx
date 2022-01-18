@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { Dimensions, Image, StyleSheet, View } from 'react-native';
 import Animated, {
+  exp,
   Extrapolate,
   interpolate,
   interpolateColor,
@@ -9,8 +10,10 @@ import Animated, {
   useDerivedValue,
   useSharedValue,
 } from 'react-native-reanimated';
+import type { StackNavigationProp } from '@react-navigation/stack';
 
 import { theme } from '../../components';
+import { Routes } from '../../components/Routes';
 
 import { Slide, SLIDE_HEIGHT } from './Slide';
 import { Subslide } from './Subslide';
@@ -101,7 +104,11 @@ const slides = [
   },
 ];
 
-export const Onboarding = () => {
+export const assets = slides.map((s) => s.picture.src);
+
+export const Onboarding = ({
+  navigation,
+}: StackNavigationProp<Routes, 'Onboarding'>) => {
   const scrollRef = useRef<Animated.ScrollView>(null);
   const x = useSharedValue(0);
   const currentIndex = useDerivedValue(() => x.value / width);
@@ -187,22 +194,27 @@ export const Onboarding = () => {
               footerStyle,
             ]}
           >
-            {slides.map(({ subTitle, description }, index) => (
-              <Subslide
-                subTitle={subTitle}
-                last={index === slides.length - 1}
-                description={description}
-                key={index}
-                onPress={() => {
-                  if (scrollRef.current) {
-                    scrollRef.current.scrollTo({
-                      x: width * (index + 1),
-                      animated: true,
-                    });
-                  }
-                }}
-              />
-            ))}
+            {slides.map(({ subTitle, description }, index) => {
+              const last = index === slides.length - 1;
+              return (
+                <Subslide
+                  subTitle={subTitle}
+                  last={last}
+                  description={description}
+                  key={index}
+                  onPress={() => {
+                    if (last) {
+                      navigation.navigate('Welcome');
+                    } else if (scrollRef.current) {
+                      scrollRef.current.scrollTo({
+                        x: width * (index + 1),
+                        animated: true,
+                      });
+                    }
+                  }}
+                />
+              );
+            })}
           </Animated.View>
         </View>
       </View>

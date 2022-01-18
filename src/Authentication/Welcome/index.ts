@@ -1,1 +1,1 @@
-export { Welcome } from './Welcome';
+export { Welcome, assets } from './Welcome';
