@@ -1,6 +1,8 @@
+import type { StackScreenProps } from '@react-navigation/stack';
 import { Dimensions, Image } from 'react-native';
 
 import { Box, theme, Text, Button } from '../../components';
+import type { Routes } from '../../components/Routes';
 
 const { width } = Dimensions.get('window');
 const picture = {
@@ -11,7 +13,9 @@ const picture = {
 
 export const assets = [picture.src];
 
-export const Welcome = () => {
+export const Welcome = ({
+  navigation,
+}: StackScreenProps<Routes, 'Welcome'>) => {
   return (
     <Box flex={1} backgroundColor="white">
       <Box
@@ -55,6 +59,7 @@ export const Welcome = () => {
             variant="primary"
             label="Have an account? Login"
             onPress={() => {
+              navigation.navigate('Login');
               console.log('pressed');
             }}
           />

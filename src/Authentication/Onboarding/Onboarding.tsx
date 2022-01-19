@@ -10,10 +10,10 @@ import Animated, {
   useDerivedValue,
   useSharedValue,
 } from 'react-native-reanimated';
-import type { StackNavigationProp } from '@react-navigation/stack';
+import { StackScreenProps } from '@react-navigation/stack';
 
 import { theme } from '../../components';
-import { Routes } from '../../components/Routes';
+import type { Routes } from '../../components/Routes';
 
 import { Slide, SLIDE_HEIGHT } from './Slide';
 import { Subslide } from './Subslide';
@@ -108,7 +108,7 @@ export const assets = slides.map((s) => s.picture.src);
 
 export const Onboarding = ({
   navigation,
-}: StackNavigationProp<Routes, 'Onboarding'>) => {
+}: StackScreenProps<Routes, 'Onboarding'>) => {
   const scrollRef = useRef<Animated.ScrollView>(null);
   const x = useSharedValue(0);
   const currentIndex = useDerivedValue(() => x.value / width);
