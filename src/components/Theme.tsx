@@ -8,6 +8,7 @@ export const theme = createTheme({
     'slide.grey': '#F4F0EF',
     text: 'rgba(12, 13, 52, 0.7)',
     white: 'white',
+    danger: '#FF0058',
   },
   spacing: {
     s: 8,
